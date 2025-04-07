@@ -12,7 +12,7 @@ public class Menu {
 	//	private static Controller controller = new Controller(produtoRepository);
 
 	//	produtoInfantil p1 = new produtoInfantil("Chinelo Infantil Cores", 79.90, 5);
-	//	produtoInfantil p2 = new produtoInfantil("Sandalia Infantil Cores", 119.90, 3);
+	// produtoInfantil p2 = new produtoInfantil("Sandalia Infantil Cores", 119.90, 3);
 	//	repository.adicionarProduto(p1);
 	//	repository.adicionarProduto(p2);
 
