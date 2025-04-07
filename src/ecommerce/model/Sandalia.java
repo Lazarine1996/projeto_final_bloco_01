@@ -3,9 +3,9 @@ package ecommerce.model;
 public class Sandalia extends Produto {
 	private float peso;
 
-	public Sandalia(String nome, double preco, int numero, int tipo, float peso) {
+	public Sandalia(int numero, String nome, double preco, int tipo, float peso) {
 		super(nome, preco, numero, tipo);
-		this.peso = peso ;
+		this.peso = peso;
 
 	}
 

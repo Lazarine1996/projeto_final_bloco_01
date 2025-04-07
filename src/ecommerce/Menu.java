@@ -2,25 +2,22 @@ package ecommerce;
 
 import java.io.IOException;
 import java.util.Scanner;
-
+import ecommerce.controller.ProdutoController;
+import ecommerce.model.Chinelo;
+import ecommerce.model.Sandalia;
 import ecommerce.util.Cores;
 
 public class Menu {
 
 	public static void main(String[] args) {
-		
+
 		Scanner leia = new Scanner(System.in);
-	//	private static ProdutoRepository repository = new ProdutoRepository();
-	//	private static ProdutoRepository produtoRepository;
-	//	private static Controller controller = new Controller(produtoRepository);
+		ProdutoController produtos = new ProdutoController();
 
-	//	produtoInfantil p1 = new produtoInfantil("Chinelo Infantil Cores", 79.90, 5);
-	// produtoInfantil p2 = new produtoInfantil("Sandalia Infantil Cores", 119.90, 3);
-	//	repository.adicionarProduto(p1);
-	//	repository.adicionarProduto(p2);
-
-		int opcao;
-
+		int opcao, numero = 0, tipo, tamanho;
+		float peso, preco;
+		String nome;
+		produtos.cadastrarProduto(new Chinelo(produtos.gerarNumero(), "Chinelo", 79.90, 1, 35));
 		while (true) {
 
 			System.out.println("***************************************************");
@@ -51,33 +48,93 @@ public class Menu {
 
 			case 1:
 				System.out.println("\n Cadastrar Produtos   ");
-				//controller.listarProdutos();
+				System.out.println("\n Digite o Nome do Produto ");
+				leia.next();
+				nome = leia.nextLine();
+				System.out.println("\n Digite o Preço do Produto ");
+				preco = leia.nextFloat();
+
+				do {
+					System.out.println("\n Digite o Tipo do Produto (1-Chinelo) (2-Sandalia)  ");
+					tipo = leia.nextInt();
+				} while (tipo < 1 || tipo > 2);
+				switch (tipo) {
+				case 1 -> {
+					System.out.println("\n Digite o Tamanho do Produto ");
+					tamanho = leia.nextInt();
+					produtos.cadastrarProduto(new Chinelo(produtos.gerarNumero(), nome, preco, tipo, tamanho));
+				}
+				case 2 -> {
+					System.out.println("\n Digite o Peso do Produto ");
+					peso = leia.nextInt();
+					produtos.cadastrarProduto(new Sandalia(produtos.gerarNumero(), nome, preco, tipo, peso));
+				}
+				default -> {
+					System.out.println(Cores.TEXT_RED_BOLD + "\nOpção Inválida!\n" + Cores.TEXT_RESET);
+				}
+				}
 				keyPress();
 				break;
 
 			case 2:
 				System.out.println("\nListar Produtos  ");
-			//	controller.adicionarProduto();
+				produtos.listarProdutos();
 				keyPress();
 				break;
 
 			case 3:
 				System.out.println("\n Atualizar Produto ");
-				//controller.removerProduto();
+				System.out.println("\n Digite o numero do produto: ");
+				numero = leia.nextInt();
+				var buscaProduto = produtos.buscarNaCollection(numero);
+
+				if (buscaProduto != null) {
+					System.out.println("\n Digite o Nome do Produto ");
+					leia.next();
+					nome = leia.nextLine();
+					System.out.println("\n Digite o Preço do Produto ");
+					preco = leia.nextFloat();
+
+					switch (buscaProduto.getTipo()) {
+					case 1 -> {
+						System.out.println("\n Digite o Tamanho do Produto ");
+						tamanho = leia.nextInt();
+						produtos.atualizarProduto(new Chinelo(numero, nome, preco, buscaProduto.getTipo(), tamanho));
+					}
+					case 2 -> {
+						System.out.println("\n Digite o Peso do Produto ");
+						peso = leia.nextInt();
+						produtos.atualizarProduto(new Sandalia(numero, nome, preco, buscaProduto.getTipo(), peso));
+					}
+					default -> {
+						System.out.println(Cores.TEXT_RED_BOLD + "\nOpção Inválida!\n" + Cores.TEXT_RESET);
+					}
+					}
+				}
+
+				else
+					System.out.println(Cores.TEXT_RED_BOLD + "\nO produto de numero: " + numero + " não foi encontrado!"
+							+ Cores.TEXT_RESET);
+
 				keyPress();
 				break;
 
 			case 4:
 				System.out.println("\n Excluir Produto ");
-				//controller.removerProduto();
+				System.out.println("\n Digite o numero do produto: ");
+				numero = leia.nextInt();
+				produtos.removerProduto(numero);
 				keyPress();
 				break;
+
 			case 5:
 				System.out.println("\n Buscar Produto ");
-				//controller.removerProduto();
+				System.out.println("\n Digite o Numero do Produto ");
+				numero = leia.nextInt();
+				produtos.buscarProduto(numero);
 				keyPress();
 				break;
-			
+
 			default:
 				System.out.println("\n Opção Inválida! Tente novamente. \n");
 				keyPress();
@@ -87,7 +144,6 @@ public class Menu {
 		}
 	}
 
-
 	public static void sobre() {
 		System.out.println(" \n*****************************************************************");
 		System.out.println("Projeto Desenvolvido por: ");
@@ -96,12 +152,13 @@ public class Menu {
 		System.out.println("*****************************************************************");
 
 	}
+
 	public static void keyPress() {
-        try {
-            System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
-            System.in.read();
-        } catch (IOException e) {
-            System.out.println("Você pressionou uma tecla diferente de enter!");
-        }
-    }
+		try {
+			System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
+			System.in.read();
+		} catch (IOException e) {
+			System.out.println("Você pressionou uma tecla diferente de enter!");
+		}
+	}
 }

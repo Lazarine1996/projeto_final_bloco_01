@@ -17,7 +17,7 @@ public abstract class Produto {
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -47,30 +47,28 @@ public abstract class Produto {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	
-	public void visualizar () {
+
+	public void visualizar() {
 		String tipo = "";
 
-        switch (this.tipo) {
-            case 1:
-                tipo = "Chinelo Infantil Cores";
-                break;
-            case 2:
-                tipo = "Sandalia Infantil Cores";
-                break;
-        }
+		switch (this.tipo) {
+		case 1:
+			tipo = "Chinelo Infantil Cores";
+			break;
+		case 2:
+			tipo = "Sandalia Infantil Cores";
+			break;
+		}
 
-        System.out.println(Cores.TEXT_RED
-                + "\n\n***********************************************************"
-                + Cores.TEXT_RESET);
-        System.out.println("Dados do Produto:");
-        System.out.println(Cores.TEXT_RED
-                + "***********************************************************"
-                + Cores.TEXT_RESET);
-        System.out.println("Numero do produto: " + getNumero());
-        System.out.println("Nome do produto: " + getNome());
-        System.out.printf("Preço do produto: R$ %.2f\n", getPreco());
-        System.out.println("Tipo do produto: " + tipo);
+		System.out.println(
+				Cores.TEXT_RED + "\n\n***********************************************************" + Cores.TEXT_RESET);
+		System.out.println("Dados do Produto:");
+		System.out.println(
+				Cores.TEXT_RED + "***********************************************************" + Cores.TEXT_RESET);
+		System.out.println("Numero do produto: " + getNumero());
+		System.out.println("Nome do produto: " + this.nome);
+		System.out.printf("Preço do produto: R$ %.2f\n", getPreco());
+		System.out.println("Tipo do produto: " + tipo);
 	}
 
 }

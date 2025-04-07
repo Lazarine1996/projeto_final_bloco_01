@@ -3,7 +3,7 @@ package ecommerce.model;
 public class Chinelo extends Produto {
 	private int tamanho;
 
-	public Chinelo(String nome, double preco, int numero, int tipo, int tamanho) {
+	public Chinelo(int numero, String nome, double preco, int tipo, int tamanho) {
 		super(nome, preco, numero, tipo);
 		this.tamanho = tamanho;
 
