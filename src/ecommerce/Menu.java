@@ -1,6 +1,9 @@
 package ecommerce;
 
+import java.io.IOException;
 import java.util.Scanner;
+
+import ecommerce.util.Cores;
 
 public class Menu {
 
@@ -49,29 +52,35 @@ public class Menu {
 			case 1:
 				System.out.println("\n Cadastrar Produtos   ");
 				//controller.listarProdutos();
+				keyPress();
 				break;
 
 			case 2:
 				System.out.println("\nListar Produtos  ");
 			//	controller.adicionarProduto();
+				keyPress();
 				break;
 
 			case 3:
 				System.out.println("\n Atualizar Produto ");
 				//controller.removerProduto();
+				keyPress();
 				break;
 
 			case 4:
 				System.out.println("\n Excluir Produto ");
 				//controller.removerProduto();
+				keyPress();
 				break;
 			case 5:
 				System.out.println("\n Buscar Produto ");
 				//controller.removerProduto();
+				keyPress();
 				break;
 			
 			default:
 				System.out.println("\n Opção Inválida! Tente novamente. \n");
+				keyPress();
 				break;
 
 			}
@@ -87,5 +96,12 @@ public class Menu {
 		System.out.println("*****************************************************************");
 
 	}
-
+	public static void keyPress() {
+        try {
+            System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
+            System.in.read();
+        } catch (IOException e) {
+            System.out.println("Você pressionou uma tecla diferente de enter!");
+        }
+    }
 }
